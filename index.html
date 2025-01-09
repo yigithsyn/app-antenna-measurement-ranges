@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Antenna Measurement Ranges</title>
+
+  <!-- disable caching -->
+  <!-- <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" /> -->
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-24QLBJ528R"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-24QLBJ528R');
+  </script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.css" integrity="sha256-ckBg2pN9ZF9KPn+vY00JXAkdqE1nv20iGM2haZhCBl4=" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://cdn.simplecss.org/simple.css"> -->
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" integrity="sha512-ZKX+BvQihRJPA8CROKBhDNvoc2aDMOdAlcm7TUQY+35XYtrd3yh95QOOhsPDQY9QnKE0Wqag9y38OIgEvb88cA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <style>
+    @media (min-width: 768px) {
+
+      html,
+      body {
+        margin: 0;
+        /* height: 100%; */
+        /* overflow: hidden */
+      }
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    footer {
+      margin-top: auto;
+    }
+
+    .selected {
+      background: aquamarine !important;
+      font-size: larger !important;
+    }
+
+    .highlighted {
+      background-color: antiquewhite;
+    }
+
+    .invisible {
+      display: none;
+    }
+
+    .photo-name {
+      /*margin-top: 245px;*/
+      /*padding: 0.5em;*/
+      position: absolute;
+      width: 100%;
+      bottom: 30px;
+      text-align: center;
+      background-color: cyan;
+      /*background-color: #666666;*/
+    }
+  </style>
+</head>
+
+<body>
+  <h3 class="ui block header center aligned">
+    Antenna Measurement Ranges <br> <em>(IEEE Std 149-2021)</em>
+  </h3>
+
+  <div class="ui centered grid" style="margin: 0.25rem;">
+    <form class="ui form sixteen wide tablet eight wide computer column">
+      <h4 class="ui dividing header center aligned">Antenna</h4>
+      <div class="field">
+        <div class="two fields">
+          <div class="field">
+            <label>Frequency [MHz]</label>
+            <input type="number" name="frequency" placeholder="Max. operating frequency" step="100">
+          </div>
+          <div class="field">
+            <label>Size [m]</label>
+            <input type="number" name="size" placeholder="Max. cross-sectional size" step="0.1">
+          </div>
+        </div>
+      </div>
+      <div class="eight wide field center" style="margin: auto;">
+        <label>Electrical Size [&lambda;]</label>
+        <input type="text" name="esize" placeholder="Will be calculated automatically" disabled>
+      </div>
+      <!-- <div class="fields">
+        <div class="eight wide field center">
+          <label>Electrical Size</label>
+          <div class="ui right labeled input">
+            <input type="text" name="esize" placeholder="Will be calculated automatically" disabled>
+            <div class="ui basic label">
+              wavelength (&lambda;)
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </form>
+  </div>
+
+  <table class="ui celled table unstackable" style="border: 0px; margin: 0rem;">
+    <tr>
+      <td colspan="4">
+        <div class="ui red message invisible">Ideal range not found.</div>
+        <div class="ui green message invisible"><span class="ui text black"></span></div>
+      </td>
+    </tr>
+  </table>
+
+  <div style="margin: 0 1rem 1rem 1rem !important;">
+    <table class="ui celled structured table unstackable">
+      <thead>
+        <tr>
+          <th rowspan="2" class="center aligned">Frequency</th>
+          <th colspan="3" class="center aligned">Antenna Size in Wavelengths (&lambda;)</th>
+        </tr>
+        <tr>
+          <th class="center aligned">Far-field Range</th>
+          <th class="center aligned">Near-field Range</th>
+          <th class="center aligned">Compact Range</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left aligned" frc>200 MHz</td>
+          <td class="center aligned" wlc>
+            &lt;2&lambda;
+          </td>
+          <td class="center aligned" wlc>
+            &gt;2&lambda;
+          </td>
+          <td class="center aligned disabled">
+            Not ideal
+          </td>
+        </tr>
+        <tr>
+          <td class="left aligned" frc>500 MHz</td>
+          <td class="center aligned" wlc>
+            &lt;2&lambda;
+          </td>
+          <td class="center aligned" wlc>
+            &gt;2&lambda;
+          </td>
+          <td class="center aligned disabled">
+            Not ideal
+          </td>
+        </tr>
+        <tr>
+          <td class="left aligned" frc>1 GHz</td>
+          <td class="center aligned" wlc>
+            &lt;5&lambda;
+          </td>
+          <td class="center aligned" wlc>
+            &gt;5&lambda;
+          </td>
+          <td class="center aligned" wlc>
+            &gt;5&lambda;
+          </td>
+        </tr>
+        <tr>
+          <td class="left aligned" frc>2 GHz</td>
+          <td class="center aligned" wlc>
+            &lt;5&lambda;
+          </td>
+          <td class="center aligned" wlc>
+            &gt;10&lambda;
+          </td>
+          <td class="center aligned" wlc>
+            &gt;10&lambda;
+          </td>
+        </tr>
+        <tr>
+          <td class="left aligned" frc>&ge; 4 GHz</td>
+          <td class="center aligned" wlc>
+            &lt;10&lambda;
+          </td>
+          <td class="center aligned" wlc>
+            &gt;10&lambda;
+          </td>
+          <td class="center aligned" wlc>
+            &gt;10&lambda;
+          </td>
+        </tr>
+        <tr>
+          <td class="center aligned" rowspan="2">Example of Facilities</td>
+          <td class="center aligned">
+            <a href="https://www.nsi-mi.com/images/System_Solutions/Far-Field/NSI-MI-Outdoor-Far-Field.jpg" data-lightbox="image-1" data-title="Courtesy of NSI-MI Technologies">
+              <img class="ui centered rounded image" style="display:block;" width="66%" src="img/nsi-ff.jpg" alt="NSI-MI Far-field Range">
+            </a>
+          </td>
+          <td class="center aligned">
+            <a href="https://bilgem.tubitak.gov.tr/sites/images/bilgem/img_5053.jpg" data-lightbox="image-1" data-title="ATAM Antenna Test and Research Laboratory">
+              <img class="ui centered fluid rounded image" style="display:block;" width="100%" src="img/atam-nf.jpg" alt="">
+            </a>
+          </td>
+          <td class="center aligned">
+            <a href="https://iasbh.tmgrup.com.tr/c316c3/650/344/0/98/1200/727?u=https://isbh.tmgrup.com.tr/sbh/2021/05/22/turkiyenin-uzaya-acilan-kapisi-uset-1621677603755.jpg" data-lightbox="image-1" data-title="TAI Space Systems Assembly, Integratıon and Test Center">
+              <img class="ui centered rounded image" style="display:block;" width="94%" src="img/uset-cr.jpg" alt="">
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td class="left aligned rowspanned"></td>
+          <td class="center aligned">
+            <a href="https://www.nsi-mi.com/products/system-solutions/far-field-systems/outdoor-far-field">
+              <em>Courtesy of NSI-MI Technologies</em>
+            </a>
+          </td>
+          <td class="center aligned">
+            <a href=https://bilgem.tubitak.gov.tr/en/urunler/atam-antenna-test-and-research-laboratory">
+              <em>ATAM Antenna Test and Research Laboratory</em>
+            </a>
+          </td>
+          <td class="center aligned">
+            <a href=https://www.tusas.com/en/products/space/manufacturing-assembly-integration-test-centers/space-systems-assembly-integration-and-test-center">
+              <em>TAI Space Systems Assembly, Integratıon and Test Center</em>
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+
+
+  <footer>
+    <div class="ui form" style="margin: 1rem !important;">
+      <u>References:</u><br>
+      [1] <a href="https://standards.ieee.org/ieee/149/6667/" target="_blank" rel="noopener noreferrer">IEEE Recommended Practice for Antenna Measurements, IEEE Std 149-2021 </a>
+      <br>
+      [2] <a href="https://www.microwavejournal.com/articles/25907-basic-rules-for-anechoic-chamber-design-part-two-compact-ranges-and-near-field-measurements" target="_blank" rel="noopener noreferrer">Rodriguez V., “Basic rules for anechoic chamber design, part one: RF absorber approximations,” Microwave Journal, vol. 59, no. 1, pp. 72–86, Jan. 2016. </a>
+      <br>
+      [3] <a href="https://www.nsi-mi.com/images/Technical_Papers/Articles/160201A%20-%20Basic%20Rules%20for%20Anechoic%20Chamber%20Design%20Part%20Two.pdf" target="_blank" rel="noopener noreferrer">Rodriguez V., “Basic rules for anechoic chamber design, part two: compact ranges and near field measurements,” Microwave Journal, vol. 59, no. 2, pp. 80–90, Feb. 2016. </a> <br>
+      [4] <a href="https://ieeexplore.ieee.org/document/7762868" target="_blank" rel="noopener noreferrer">Rodriguez V., “Basic rules for indoor anechoic chamber design,” IEEE Antennas and Propagation Magazine, Dec. 2016. </a>
+
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/fomantic-ui@2.8.8/dist/semantic.min.js" integrity="sha256-VxL9ZXOItJ0i4nJLm39HIoX8u3cCRPRkDjMSXZ/RiQQ=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js" integrity="sha512-k2GFCTbp9rQU412BStrcD/rlwv1PYec9SNrkbQlo6RZCf75l6KcC3UwDY8H5n5hl4v77IDtIPwOk9Dqjs/mMBQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script>
+    function update() {
+      let isMatched = false
+      let matchedRanges = []
+      let fRanges = [0, 2, 4, 7, 10]
+      let nRanges = [1, 3, 5, 8, 11]
+      let cRanges = [6, 9, 12]
+      $('[wlc]').removeClass("selected")
+      $('.message').addClass("invisible")
+      if ($('[name="size"').val() && $('[name="frequency"').val()) {
+        let val = ($('[name="size"').val() / (3E8 / ($('[name="frequency"').val() * 1E6))).toFixed(1)
+        $('[name="esize"').val(String(val))
+        $('[wlc]').each((index, elem) => {
+          let criteria = Number($(elem).html().replace("&lambda;", "").replace("<", "").replace(">", "").replace("λ", "").replace("&gt;", "").replace("&lt;", ""))
+          if ($(elem).html().includes("<") || $(elem).html().includes("&lt;")) {
+            if (val <= criteria && $(elem).parent().hasClass("highlighted")) {
+              $(elem).addClass("selected")
+              isMatched = true
+              if (fRanges.includes(index))
+                matchedRanges.push("Far-field")
+              else if (nRanges.includes(index))
+                matchedRanges.push("Near-field")
+              else
+                matchedRanges.push("Compact Range")
+            }
+          }
+          if ($(elem).html().includes(">") || $(elem).html().includes("&gt;")) {
+            if (val >= criteria && $(elem).parent().hasClass("highlighted")) {
+              $(elem).addClass("selected")
+              isMatched = true
+              if (fRanges.includes(index))
+                matchedRanges.push("Far-field")
+              else if (nRanges.includes(index))
+                matchedRanges.push("Near-field")
+              else
+                matchedRanges.push("Compact Range")
+            }
+          }
+        })
+        if (!isMatched)
+          $('.red.message').removeClass("invisible")
+        else {
+          $('.green.message>span').text(matchedRanges[0])
+          for (var i = 1; i < matchedRanges.length; i++) {
+            $('.green.message>span').text($('.green.message>span').text() + ' & ' + matchedRanges[i])
+          }
+          $('.green.message>span').text('Suitable ranges: ' + $('.green.message>span').text())
+          $('.green.message').removeClass("invisible")
+        }
+
+      }
+    }
+
+    function highlight() {
+      $(`tbody>tr`).removeClass("highlighted")
+      let matched = []
+      for (let i = 0; i < $('[frc]').length; i++) {
+        let j = $('[frc]').length - 1 - i
+        let freq = Number($(`[frc]:eq(${j})`).text().replace(" MHz", ""))
+        if ($(`[frc]:eq(${j})`).text().includes("GHz")) {
+          freq = Number($(`[frc]:eq(${j})`).text().replace(" GHz", "").replace("≥ ", "").replace("&ge;", "")) * 1000
+        }
+        if ($('[name="frequency"').val() >= freq) {
+          console.log($(`tbody>tr:eq(${j})`).addClass("highlighted"))
+          break
+        }
+      }
+    }
+
+    $(document).ready(() => {
+      $('.focus').transition('tada');
+      $('[name="size"').bind("keypress keyup keydown", () => {
+        update()
+      })
+      $('[name="frequency"').bind("keypress keyup keydown", () => {
+        highlight()
+        update()
+      })
+    })
+  </script>
+</body>
+
+</html>
